@@ -82,4 +82,4 @@ tests:
       - key: language_name
         value: "French"
       - key: include_serp_info
-        value: true
+        value: "true"
