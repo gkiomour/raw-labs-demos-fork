@@ -42,7 +42,7 @@ tests:
       - key: keywords
         value: "tesla"
       - key: location_code
-        value: 2840
+        value: "2840"
       - key: language_code
         value: "en"
   - name: test2
@@ -60,7 +60,7 @@ tests:
       - key: keywords
         value: "tesla,bmw"
       - key: location_code
-        value: 2840
+        value: "2840"
       - key: language_name
         value: "English"
   - name: test4
