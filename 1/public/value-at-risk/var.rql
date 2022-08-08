@@ -1,12 +1,9 @@
 close_price_history(symbols: collection(string), timespan: interval) := {
-select symbol, TO_DATE(date, "yyyy-MM-dd") AS Date,
-           close, 
-           change, 
-           changePercent
+select symbol, date, close, change, changePercent
 from READ("https://dl.dropboxusercontent.com/s/ugxtudruc0ojvuw/5yr_us_stocks.csv", cache := interval "5 days")
     where symbol in symbols and 
-    TO_DATE(date, "yyyy-MM-dd") >= current_date() - timespan
-    ORDER BY TO_DATE(date, "yyyy-MM-dd") ASC
+    date >= (current_date() - timespan)
+    ORDER BY date ASC
 }
     
 // VaR calc
@@ -44,13 +41,13 @@ historical_var(
                         WHERE l.symbol = p.symbol;
     
     // daily return of the portfolio over the historical period
-    pf_returns := SELECT Date, 
+    pf_returns := SELECT date, 
                   ISNULL(SUM(h.changePercent * p.assets * h.close)/SUM(p.assets * h.close),0) AS pct_return
                   FROM pf_history h, 
                        portfolio p
                   WHERE h.symbol = p.symbol
-                  GROUP BY h.Date
-                  ORDER BY Date;
+                  GROUP BY h.date
+                  ORDER BY date;
 
     // VaR in dollars for this portfolio
     valueAtRisk((SELECT pct_return FROM pf_returns), confidence) * pf_latest_value
