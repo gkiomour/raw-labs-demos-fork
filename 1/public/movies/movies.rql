@@ -2,7 +2,8 @@
 // simple demo on a movie JSON database
 //
 
-movies := READ("https://raw.githubusercontent.com/prust/wikipedia-movie-data/master/movies.json");
+movies :=
+READ("https://raw.githubusercontent.com/prust/wikipedia-movie-data/master/movies.json", cache := interval "10 days");
 
 search_by_title(title: string) := {
   SELECT * FROM movies m 

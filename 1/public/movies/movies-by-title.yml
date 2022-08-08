@@ -25,3 +25,5 @@ security:
   public: true
 computeClass: normal
 enabled: true
+computeLimitSeconds: 90
+refreshSeconds: 3600
